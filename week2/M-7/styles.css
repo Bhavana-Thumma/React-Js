@@ -1,0 +1,56 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(245, 178, 211);
+  background-image: linear-gradient(to bottom right,rgb(168, 168, 216), pink,  rgb(238, 194, 217), pink, rgb(116, 116, 161));
+
+}
+
+/* .piano {
+  height: 100vh;
+  width: 70%;
+  display: flex;
+  padding: auto;
+  margin: auto;
+  justify-content: center;
+  padding-top:40px; 
+}
+
+.key {
+  height: calc(var(--width) * 4);
+  width: var(--width);
+}
+
+.white {
+  --width: 78px;
+  background-color: white;
+  border: 1px solid #333;
+}
+
+.white.active {
+  background-color: #CCC;
+}
+
+.black {
+  --width: 48px;
+  background-color: black;
+  margin-left: calc(var(--width) / -2);
+  margin-right: calc(var(--width) / -2);
+  z-index: 2;
+}
+
+.black.active {
+  background-color: #333;
+} */
+
+.key {
+  opacity: 1px;
+}
+.white{
+  background: white;
+}
+.black{
+  background: rgb(24, 24, 24);
+}

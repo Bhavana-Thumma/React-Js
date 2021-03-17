@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <title>Piano</title>
+  <style>
+    .center {
+    display: block;
+    margin: auto;
+    padding: auto;
+    height: 257px;
+    width: 796px;
+    margin-top: 100px;
+    }
+  </style>
+</head>
+
+<body>  
+  <h2 align="center">Piano</h2>
+  <div style = "height: 100vh"> 
+    <img id="image" src="piano1.png" usemap=#piano class="center">
+    <map name="piano">
+      <area data-note="C" id= "key" class="key white" coords="0,0 42,0 42,138 55,140 57,240 0,240" shape="poly">
+      <area data-note="Db" class="key black" coords="42,0 70,140" shape="rect">
+      <area data-note="D" class="key white" coords="71,0 97,0 97,138 112,138 112,242 55,240, 56,140 70,140" shape="poly">
+      <area data-note="Eb" class="key black" coords="98,0 125,137" shape="rect">
+      <area data-note="E" class="key white" coords="111,140 111,137 169,240 169,0 124,0" shape="poly">
+      <area data-note="F" class="key white" coords="166,0 166,240 208,0 208,140 223,140 223,240 165,240" shape="poly">
+      <area data-note="Gb" class="key black" coords="209,0 236,140" shape="rect">
+      <area data-note="G" class="key white" coords="244, 0 270,0 272, 147 286,147 286,250 230,250 231,147 244, 148" shape="poly">
+      <area data-note="Ab" class="key black" coords="270,10 300,145" shape="rect">
+      <area data-note="A" class="key white" coords="300,0 328,0 328,147 343,147 344,249 286,250 286,146 300,147" shape="poly">
+      <area data-note="Bb" class="key black" coords="328,8 354,148" shape="rect"> 
+      <area data-note="B" class="key white" coords="390,0 390,240 335,140 335,240 348,0 348,140" shape="poly">
+      <area data-note="C" class="key white" coords="398,8 786,250" shape="rect">
+
+    </map>
+  </div>
+  <!-- <div class = "piano">
+    <div data-note="C" class="key white"></div>
+    <div data-note="Db" class="key black"></div>
+    <div data-note="D" class="key white"></div>
+    <div data-note="Eb" class="key black"></div>
+    <div data-note="E" class="key white"></div>
+    <div data-note="F" class="key white"></div>
+    <div data-note="Gb" class="key black"></div>
+    <div data-note="G" class="key white"></div>
+    <div data-note="Ab" class="key black"></div>
+    <div data-note="A" class="key white"></div>
+    <div data-note="Bb" class="key black"></div>
+    <div data-note="B" class="key white"></div>   -->
+    
+
+    <!-- <div data-note="C" class="key white"></div>
+    <div data-note="Db" class="key black"></div>
+    <div data-note="D" class="key white"></div>
+    <div data-note="Eb" class="key black"></div>
+    <div data-note="E" class="key white"></div>
+    <div data-note="F" class="key white"></div>
+    <div data-note="Gb" class="key black"></div>
+    <div data-note="G" class="key white"></div>
+    <div data-note="Ab" class="key black"></div>
+    <div data-note="A" class="key white"></div>
+    <div data-note="Bb" class="key black"></div>
+    <div data-note="B" class="key white"></div> -->
+  <!-- </div> -->
+
+  <audio id="C" src="sounds/C.mp3"></audio>
+  <audio id="Db" src="sounds/Db.mp3"></audio>
+  <audio id="D" src="sounds/D.mp3"></audio>
+  <audio id="Eb" src="sounds/Eb.mp3"></audio>
+  <audio id="E" src="sounds/E.mp3"></audio>
+  <audio id="F" src="sounds/F.mp3"></audio>
+  <audio id="Gb" src="sounds/Gb.mp3"></audio>
+  <audio id="G" src="sounds/G.mp3"></audio>
+  <audio id="Ab" src="sounds/Ab.mp3"></audio>
+  <audio id="A" src="sounds/A.mp3"></audio>
+  <audio id="Bb" src="sounds/Bb.mp3"></audio>
+  <audio id="B" src="sounds/B.mp3"></audio>
+</body>
+</html>
