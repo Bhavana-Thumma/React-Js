@@ -1,6 +1,7 @@
 var username;
 var rollnum;
 var score = 0;
+var chked = 0;
 var displayname;
 var content;
 
@@ -14,6 +15,7 @@ function saveLogin()
     localStorage.setItem("uname", username)
     localStorage.setItem("rollnum", rollnum)
     localStorage.setItem("score", score)
+    localStorage.setItem("chked", chked)
     // document.getElementById("name").innerHTML = "HI "+username+"!"
     // document.getElementById("login").style.display = "none"
     window.location.href = "q1.html"
@@ -31,25 +33,25 @@ function loadDoc() {
         {
             s+='<form id='+'\"'+e+'\"'+'name = \"forms\"'+'>'+'<p class="lead">'+(e+1)+". "+quejson[e][e+1]+"</p>"+
             "<div class='form-check'>"+
-            '<input class="form-check-input" type="radio" name='+'\"'+e+'\"' +'id="exampleRadios1" value='+"\""+(quejson[e]["a"]).toString()+"\""+' checked>'+
+            '<input class="form-check-input" type="radio" name='+'\"'+e+'\"' +'id="exampleRadios1" value='+"\""+(quejson[e]["a"]).toString()+"\""+' >'+
             '<label class="form-check-label" for="exampleRadios1">'+
             quejson[e]['a']+
             '</label>'+
             '</div>'+
             "<div class='form-check'>"+
-            '<input class="form-check-input" type="radio" name='+'\"'+e+'\"'+' id="exampleRadios1" value='+"\""+(quejson[e]["a"]).toString()+"\""+' >'+
+            '<input class="form-check-input" type="radio" name='+'\"'+e+'\"'+' id="exampleRadios1" value='+"\""+(quejson[e]["b"]).toString()+"\""+' >'+
             '<label class="form-check-label" for="exampleRadios1">'+
             quejson[e]['b']+
             '</label>'+
             '</div>'+
             "<div class='form-check'>"+
-            '<input class="form-check-input" type="radio" name='+'\"'+e+'\"'+' id="exampleRadios1" value='+"\""+(quejson[e]["a"]).toString()+"\""+' >'+
+            '<input class="form-check-input" type="radio" name='+'\"'+e+'\"'+' id="exampleRadios1" value='+"\""+(quejson[e]["c"]).toString()+"\""+' >'+
             '<label class="form-check-label" for="exampleRadios1">'+
             quejson[e]['c']+
             '</label>'+
             '</div>'+
             "<div class='form-check'>"+
-            '<input class="form-check-input" type="radio" name='+'\"'+e+'\"'+' id="exampleRadios1" value='+"\""+(quejson[e]["a"]).toString()+"\""+' >'+
+            '<input class="form-check-input" type="radio" name='+'\"'+e+'\"'+' id="exampleRadios1" value='+"\""+(quejson[e]["d"]).toString()+"\""+' >'+
             '<label class="form-check-label" for="exampleRadios1">'+
             quejson[e]['d']+
             '</label>'+
@@ -87,7 +89,9 @@ function dothis(ct)
                     // console.log(options[i].value)
                     if(options[i].checked && options[i].value == rj[j]['answer'])
                     {
-                        // console.log(options[i].value)
+                        chked = Number(localStorage.getItem("chked")) + 1
+                        localStorage.setItem("chked", chked)
+                        console.log(options[i].value)
                         score = Number(getScore()) + 1
                         setScore(score)
                         
@@ -100,6 +104,7 @@ function dothis(ct)
 
     document.getElementById("result").innerHTML=dispScore()
     setScore(0)
+    localStorage.setItem("chked", 0)
     document.getElementById("content").style.display = "none"
     document.getElementById("bt").style.display = "none"
 }
@@ -167,4 +172,4 @@ displayroll = localStorage.getItem("rollnum")
 console.log(displayname, displayroll)
 document.getElementById("setUname").innerHTML = displayname + " - "+ displayroll
 function dispScore(){
-return document.getElementById("result").innerHTML = "Score: "+localStorage.getItem("score")+"/10"}
+return document.getElementById("result").innerHTML = "Score: "+localStorage.getItem("score")+"/10" + "<br>Attempted: "+localStorage.getItem("chked")+"/10"}
