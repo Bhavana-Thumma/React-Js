@@ -87,14 +87,15 @@ function dothis(ct)
                 for(let i = 0; i < options.length; i++)
                 {
                     // console.log(options[i].value)
-                    if(options[i].checked && options[i].value == rj[j]['answer'])
+                    if(options[i].checked)
                     {
                         chked = Number(localStorage.getItem("chked")) + 1
                         localStorage.setItem("chked", chked)
-                        console.log(options[i].value)
-                        score = Number(getScore()) + 1
-                        setScore(score)
-                        
+                        if( options[i].value == rj[j]['answer']){
+                            console.log(options[i].value)
+                            score = Number(getScore()) + 1
+                            setScore(score)
+                        }                        
                     }
                 }
                 
