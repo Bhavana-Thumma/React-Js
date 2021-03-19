@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body onload="loadDoc()">
+
+<div id="demo">
+<h1>The XMLHttpRequest Object</h1>
+
+</div>
+<div id="content">
+    <h1>filler content</h1>
+</div>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      quejson = JSON.parse(this.responseText)
+      document.getElementById("content").innerHTML =
+      quejson[0].answer;
+    }
+  };
+  xhttp.open("GET", "test.json", true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
