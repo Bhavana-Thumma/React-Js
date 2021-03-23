@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>SignInUP</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-color: beige;
+            margin-top: 50px;
+            margin-left: 40%;
+        }
+        input, button, div{
+            margin:5px;
+        }
+    </style>
+  </head>
+
+  <body>
+    <div id="SignIn" ></div>
+    <div id="SignUP"></div>
+    <div id="show"></div>
+    <script type="text/babel">
+        class Signin extends React.Component{
+            constructor(props){
+            super(props);
+            this.state={
+                name: '',
+                pwd: '',
+                mg: ''
+
+            };
+            }
+
+            render(){
+                return(
+                    <div>                       
+                    
+                    <label><input onChange={this.setname} type="text" id="name" placeholder="Name" required/></label><br/>
+                    <label><input onChange={this.setpwd} type="password" id="pwd" placeholder="Password" required/></label><br/>
+                    <button onClick={this.goto} id="butup" name="buttonup">Sign Up</button>
+                    <button  onClick={this.showMessage}id="butin" name="buttonin">Sign In</button>   
+                    <div>{this.state.mg}</div>                
+                    
+                    </div>
+                );
+            }
+            setname = (event) => {
+            this.setState({name: event.target.value});      
+            console.log(this.state.name)       
+
+            }
+
+            setpwd = (event) => {
+                this.setState({pwd: event.target.value});
+
+            }
+
+            showMessage = () =>{
+                this.setState({
+                    mg: <h2>Hello {this.state.name}!</h2>                    
+                });
+
+            }
+
+            goto = () =>{
+                document.getElementById('SignIn').style.display = 'none'
+                document.getElementById('SignUP').style.display = 'block'
+                document.getElementById('name').value = ''
+                document.getElementById('pwd').value = ''
+
+            }
+        
+        }
+
+        // Signup page should contain required fields(username,password, mobile number,DOB ,etc.,)
+        // After signup , redirect to the Message component which displays the entered user name and successfully registered message.
+        // Signup page should contain a sign in page URL.
+        class Signup extends React.Component{
+          constructor(props){
+            super(props);
+            this.state = {
+              Uname: '',
+              Pwd: '',
+              mobilenum: '',
+              DOBirth: '',
+              msg: ''
+            }
+          }
+            render(){
+                return(
+                    <div>
+                    
+                    <label><input onChange={this.setName} type="text" id="Uname" placeholder="Name" required/></label><br/>
+                    <label><input onChange={this.setPwd} type="password" id="Pwd" placeholder="Password" required/></label><br/>
+                    <label><input onChange={this.setmobilenum} type="text" id="mobilenum" placeholder="Contact no." required/></label><br/>                    
+                    <label><input onChange={this.setDOBirth} type="text" id="DOBirth" placeholder="DOBirth" required/></label><br/>
+                    <button onClick={this.showMessage} id="buttonup" name="buttonup">Sign Up</button>
+                    <button onClick={this.goto} id="buttonin" name="buttonin">Sign In</button>   
+                    <div>{this.state.msg}</div>                
+                    
+                    </div>
+                );
+            }
+            
+            setName = (event) => {
+              // this.setState(state => ({
+              //   Uname: state.Uname
+              // }));
+              // console.log(this.state.Uname)
+              this.setState({Uname: event.target.value});
+              
+
+            }
+
+            setPwd = (event) => {
+              this.setState({Pwd: event.target.value});
+
+            }
+
+            setmobilenum = (event) => {
+              this.setState({mobilenum: event.target.value});
+
+            }
+
+            setDOBirth = (event) => {
+              this.setState({DOBirth: event.target.value});
+
+            }
+        
+            showMessage = () =>{
+                this.setState({
+                    msg: <h2>Hello {this.state.Uname}!</h2>
+                });
+            }
+
+            goto = () =>{
+                document.getElementById('SignIn').style.display = 'block'
+                document.getElementById('SignUP').style.display = 'none'
+                document.getElementById('Uname').value = ''
+                document.getElementById('Pwd').value = ''
+                document.getElementById('mobilenum').value = ''
+                document.getElementById('DOBirth').value = ''
+            }
+        }
+        document.getElementById('SignIn').style.display = 'none'
+        ReactDOM.render(<Signup />, document.querySelector("#SignUP"));
+
+        ReactDOM.render(<Signin />, document.querySelector("#SignIn"));
+
+    </script>
+  </body>
+</html>
