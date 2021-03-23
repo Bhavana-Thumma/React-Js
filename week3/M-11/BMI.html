@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Hello</title>
+    <style>
+      input
+      {
+        margin:5px;
+        padding:5px     
+
+      }
+      body
+      {
+        margin-top: 50px;
+        margin-left: 40%;
+        margin-right: 30%;
+        background-color: rgb(187, 245, 235);
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div id="app" ></div>
+    <h2 id="result"></h2>
+    <script type="text/babel">
+
+        class App extends React.Component {
+
+            render() {
+            return (
+                <div>
+                    <h2>Enter hight and weight</h2>
+
+                    <label><input type="number" name="weight" placeholder="weight" /> wt</label><br/>
+                    <label><input type="number" name="feet" placeholder="feet" /> ft</label><br/>
+                    <label><input type="number" name="inch" placeholder="inches" /> in</label><br/>
+                    <button id="ans" onClick={this.Compute}>submit</button>
+
+                    
+                </div>
+            );
+            }
+  
+            Compute = () => {
+                const w = document.getElementsByName("weight")[0].value;
+                // const m = document.getElementsByName("feet")[0].value;
+                const f = document.getElementsByName("feet")[0].value;
+                const i = document.getElementsByName("inch")[0].value;
+                var l = w/(2.20462)
+                var h = (f*12)+(i)
+                console.log(w, f, i)
+                document.getElementById("result").innerHTML = ((l/(h^2))*703)+" BMI";
+            }
+        }
+
+      ReactDOM.render(<App />, document.querySelector("#app"));
+
+    </script>
+  </body>
+</html>
