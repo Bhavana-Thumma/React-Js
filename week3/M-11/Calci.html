@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Calci</title>
+    <style>
+      input
+      {
+        margin:5px;
+        padding:5px     
+
+      }
+      body
+      {
+        margin-top: 50px;
+        margin-left: 40%;
+        margin-right: 30%;
+        background-color: rgb(187, 245, 235);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" ></div>
+    <!-- <textarea id="result"></textarea> -->
+    <h2 id="result"></h2>
+    <script type="text/babel">
+
+        class App extends React.Component {
+
+            render() {
+            return (
+                <div>
+                    <h2>Enter hight and weight</h2>
+
+                    <label><input type="number" name="num1" placeholder="Enter Number One" /> Fisrt</label><br/>
+                    <label><input type="number" name="num2" placeholder="Enter Number Two" /> Second</label><br/>
+
+                    <button id="sum" onClick={this.Add}>+</button>
+                    <button id="sub" onClick={this.Sub}>-</button>
+                    <button id="mul" onClick={this.Mul}>*</button>
+                    <button id="div" onClick={this.Div}>/</button>
+                    
+                </div>
+            );
+            }
+  
+            Add = () => {
+                const n1 = parseFloat(document.getElementsByName("num1")[0].value, 10);
+                const n2 = parseFloat(document.getElementsByName("num2")[0].value, 10);
+                document.getElementById("result").innerHTML = n1+n2;
+            }
+            Sub = () => {
+                const n1 = document.getElementsByName("num1")[0].value;
+                const n2 = document.getElementsByName("num2")[0].value;
+                document.getElementById("result").innerHTML = n1-n2;
+            }
+            Mul = () => {
+                const n1 = document.getElementsByName("num1")[0].value;
+                const n2 = document.getElementsByName("num2")[0].value;
+                document.getElementById("result").innerHTML = n1*n2;
+            }
+            Div = () => {
+                const n1 = document.getElementsByName("num1")[0].value;
+                const n2 = document.getElementsByName("num2")[0].value;
+                document.getElementById("result").innerHTML = n1/n2;
+            }
+        }
+
+      ReactDOM.render(<App />, document.querySelector("#app"));
+
+    </script>
+  </body>
+</html>
