@@ -25,6 +25,7 @@
     <div id="SignIn" ></div>
     <div id="SignUP"></div>
     <div id="show"></div>
+    <div id='msg'></div>
     <script type="text/babel">
         class Signin extends React.Component{
             constructor(props){
@@ -44,8 +45,7 @@
                     <label><input onChange={this.setname} type="text" id="name" placeholder="Name" required/></label><br/>
                     <label><input onChange={this.setpwd} type="password" id="pwd" placeholder="Password" required/></label><br/>
                     <button onClick={this.goto} id="butup" name="buttonup">Sign Up</button>
-                    <button  onClick={this.showMessage}id="butin" name="buttonin">Sign In</button>   
-                    <div>{this.state.mg}</div>                
+                    <button  onClick={this.showMessage}id="butin" name="buttonin">Sign In</button>               
                     
                     </div>
                 );
@@ -62,21 +62,32 @@
             }
 
             showMessage = () =>{
-                this.setState({
-                    mg: <h2>Hello {this.state.name}!</h2>                    
-                });
+                // this.setState({
+                //     mg: <h2>Hello {this.state.name}!</h2>                    
+                // });
+                // console.log(this.state.mg)
+                ReactDOM.render(<Show n ={this.state.name}/>, document.querySelector("#show"));
+                document.getElementById('show').style.display = 'block'
 
             }
 
             goto = () =>{
                 document.getElementById('SignIn').style.display = 'none'
                 document.getElementById('SignUP').style.display = 'block'
+                document.getElementById('show').style.display = 'none'
                 document.getElementById('name').value = ''
                 document.getElementById('pwd').value = ''
 
             }
         
         }
+        class Show extends React.Component{
+          render(){
+            return(
+            <h1>Hello {this.props.n}!</h1>);
+          }
+        }
+        
 
         // Signup page should contain required fields(username,password, mobile number,DOB ,etc.,)
         // After signup , redirect to the Message component which displays the entered user name and successfully registered message.
@@ -134,14 +145,17 @@
             }
         
             showMessage = () =>{
-                this.setState({
-                    msg: <h2>Hello {this.state.Uname}!</h2>
-                });
+                // this.setState({
+                //     msg: <h2>Hello {this.state.Uname}!</h2>
+                // });
+                ReactDOM.render(<Show n ={this.state.Uname}/>, document.querySelector("#show"));
+                document.getElementById('show').style.display = 'block'
             }
 
             goto = () =>{
                 document.getElementById('SignIn').style.display = 'block'
                 document.getElementById('SignUP').style.display = 'none'
+                document.getElementById('show').style.display = 'none'
                 document.getElementById('Uname').value = ''
                 document.getElementById('Pwd').value = ''
                 document.getElementById('mobilenum').value = ''
@@ -150,7 +164,7 @@
         }
         document.getElementById('SignIn').style.display = 'none'
         ReactDOM.render(<Signup />, document.querySelector("#SignUP"));
-
+        // ReactDOM.render(<Show name ='Bhavana'/>, document.querySelector("#msg"));
         ReactDOM.render(<Signin />, document.querySelector("#SignIn"));
 
     </script>
