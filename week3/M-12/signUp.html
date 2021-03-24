@@ -4,27 +4,30 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>SignInUP</title>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body{
-            background-color: beige;
-            margin-top: 50px;
-            margin-left: 40%;
-        }
-        input, button, div{
-            margin:5px;
-        }
+      .This{
+        margin-left: 20%;
+        margin-top: 40px;
+      }
+      button{
+        margin: 5px;
+      }
+
     </style>
+
   </head>
 
   <body>
     <div id="SignIn" ></div>
     <div id="SignUP"></div>
-    <div id="show"></div>
+    <div id="show" align='center'></div>
     <div id='msg'></div>
     <script type="text/babel">
         class Signin extends React.Component{
@@ -40,12 +43,18 @@
 
             render(){
                 return(
-                    <div>                       
+                    <div className='This'> 
+                      <div className="container">
+                        <div id="login-row" className="row justify-content-center align-items-center">
+                        <div id="login-column" className="col-md-6">
+                        <div id="login-box" className="col-md-12">                        
+                        <form id="login-form" className="form" action="" method="post">                      
                     
-                    <label><input onChange={this.setname} type="text" id="name" placeholder="Name" required/></label><br/>
-                    <label><input onChange={this.setpwd} type="password" id="pwd" placeholder="Password" required/></label><br/>
-                    <button onClick={this.goto} id="butup" name="buttonup">Sign Up</button>
-                    <button  onClick={this.showMessage}id="butin" name="buttonin">Sign In</button>               
+                          <div className="form-group"><label><input onChange={this.setname} className="form-control" type="text" id="name" placeholder="Name" required/></label><br/></div>
+                          <div className="form-group"><label><input onChange={this.setpwd} className="form-control" type="password" id="pwd" placeholder="Password" required/></label><br/></div>
+                          <button onClick={this.goto} className="btn btn-primary" id="butup" name="buttonup">Sign Up</button>
+                          <button  onClick={this.showMessage} className="btn btn-primary" id="butin" name="buttonin">Sign In</button>     
+                        </form> </div></div></div></div>         
                     
                     </div>
                 );
@@ -105,16 +114,21 @@
           }
             render(){
                 return(
-                    <div>
-                    
-                    <label><input onChange={this.setName} type="text" id="Uname" placeholder="Name" required/></label><br/>
-                    <label><input onChange={this.setPwd} type="password" id="Pwd" placeholder="Password" required/></label><br/>
-                    <label><input onChange={this.setmobilenum} type="text" id="mobilenum" placeholder="Contact no." required/></label><br/>                    
-                    <label><input onChange={this.setDOBirth} type="text" id="DOBirth" placeholder="DOBirth" required/></label><br/>
-                    <button onClick={this.showMessage} id="buttonup" name="buttonup">Sign Up</button>
-                    <button onClick={this.goto} id="buttonin" name="buttonin">Sign In</button>   
-                    <div>{this.state.msg}</div>                
-                    
+                    <div className='This'>
+                      <div className="container">
+                        <div id="login-row" className="row justify-content-center align-items-center">
+                        <div id="login-column" className="col-md-6">
+                        <div id="login-box" className="col-md-12">                        
+                        <form id="login-form" className="form" action="" method="post">
+                        <div className="form-group"><label><input onChange={this.setName} className="form-control" type="text" id="Uname" placeholder="Name" required/></label></div>
+                        <div className="form-group"><label><input onChange={this.setPwd} className="form-control" type="password" id="Pwd" placeholder="Password" required/></label></div>
+                        <div className="form-group"><label><input onChange={this.setmobilenum} className="form-control" type="text" id="mobilenum" placeholder="Contact no." required/></label></div>                
+                        <div className="form-group"><label><input onChange={this.setDOBirth} className="form-control" type="text" id="DOBirth" placeholder="DOBirth" required/></label></div>
+                        <button onClick={this.showMessage} className="btn btn-primary" id="buttonup" name="buttonup">Sign Up</button>
+                        <button onClick={this.goto} className="btn btn-primary" id="buttonin" name="buttonin">Sign In</button>   
+                        <div>{this.state.msg}</div>                
+                        </form></div></div></div>
+                      </div>
                     </div>
                 );
             }
