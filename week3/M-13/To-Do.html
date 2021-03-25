@@ -1,0 +1,98 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+	
+
+	<style>
+		h1 {
+			text-align: center;
+			background: #58d5fc;
+			margin: 10px;
+			padding: 7px;
+		}		
+		button:hover{
+			background-color:rgb(86, 247, 65) !important;
+		}
+		
+	</style>
+		
+</head>
+<body>
+	<div id="app"></div>
+</body>
+
+<script type="text/babel">
+
+	class User extends React.Component{
+		constructor(props){
+			super(props);	
+			this.state = {taskList:[]};
+		}
+		
+		render(){ 
+			return(
+				<div>
+					<h1>To-Do List</h1>
+					<div align ="center">
+					<input type='text' name='taskitem'  id="taskitem" placeholder='Add a Task' />
+					<button onClick={this.addtoList}>+</button>
+					<div><h2>Tasks Left {this.state.taskList.length}</h2></div>
+					<table>
+						<thead><tr><td><h3>Name</h3></td><td><h3>action</h3></td></tr></thead>
+						<tbody>
+						{
+							this.state.taskList.map((usr, i) => 
+								<tr key={i}><td>{usr}</td><td><button onClick={this.remove} value={i}>Delete</button></td></tr>
+							)
+						}
+						</tbody>						
+					</table>
+					</div>
+				</div>				
+			); 
+		}
+		
+		addtoList = () =>{
+			const taskitem = document.querySelector("#taskitem").value;
+			console.log(taskitem);
+			if (taskitem === ""){
+				alert("plase Add a Task")
+			}
+			else
+			{
+			this.setState({taskList:[...this.state.taskList,taskitem]});
+			console.log(this.state.taskList);
+			document.querySelector('#taskitem').value =""
+			}
+		}
+
+		remove = (e) => {
+			// alert(e.target.value)
+			const v = e.target.value
+			this.state.taskList.splice(v,1)
+			this.setState({users:[...this.state.taskList]});
+			console.log(this.state.taskList);
+
+		}
+	}
+	
+	class App extends React.Component{
+		render(){
+			return(
+				<div>
+					<User/>
+				</div>
+			);
+		}
+	}
+
+	
+	ReactDOM.render(<App/>, document.querySelector('#app'));		
+</script>
+
+</html>
