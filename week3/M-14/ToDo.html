@@ -1,0 +1,108 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<link rel="stylesheet" href="todo.css">
+		
+</head>
+<body>
+	<div id="app"></div>
+	<div id="msg"></div>
+</body>
+
+<script type="text/babel">
+
+	class User extends React.Component{
+		constructor(props){
+			super(props);
+			this.state = {taskList: [], input:""};
+			this.update = this.update.bind(this);
+		}
+		
+		render(){ 
+			return(
+				<div className='todo-app'>
+					<h1>To-Do List</h1>
+					<div align ="center">
+					<input type='text' onChange={this.setInp} name='taskitem'  id="taskitem" value={this.state.input} placeholder='Add a Task' />
+					<button id='greenShow' onClick={this.addtoList}>+</button>
+					<div><h2>Tasks Left {this.state.taskList.length}</h2></div>
+					<table>
+						<tbody>
+
+						{
+							this.state.taskList.map((usr, i) => 
+							<tr key={i}>
+								<td>{usr}</td>
+								<td><button id ="redShow" onClick={this.remove} value={i}>Delete</button></td>
+								<td><button id ="greenShow" onClick={this.update} value={i}>Update</button></td>
+							</tr>
+							)
+						}
+						</tbody>						
+					</table>
+					</div>
+				</div>				
+			); 
+		}
+
+		setInp = (event) => {
+			console.log(event.target.value)
+			this.setState({input:event.target.value});
+		}
+
+		
+		addtoList = () =>{
+			const taskitem = document.querySelector("#taskitem").value;
+			console.log(taskitem);
+			if (taskitem === ""){
+				alert("plase Add a Task")
+			}
+			else
+			{
+			this.setState({taskList:[...this.state.taskList,taskitem]});
+			console.log(this.state.taskList);
+			this.setState({input:""});
+			}
+		}
+
+		remove = (e) => {
+			// alert(e.target.value)
+			const v = e.target.value
+			this.state.taskList.splice(v,1)
+			this.setState({users:[...this.state.taskList]});
+			// console.log(this.state.taskList);
+
+		}
+
+        update =(ele)=>{
+                const r=ele.target.value;
+               // alert(this.state.list[r]);
+                const newlist=this.state.taskList.splice(r, 1);
+                this.setState({taskList: this.state.taskList});
+                const uname = document.querySelector("#taskitem").value;
+                const one=this.state.taskList.splice(r, 0, uname);
+                this.setState({taskList: this.state.taskList});
+                this.setState({input:""});
+            }
+
+
+
+	}
+
+	class App extends React.Component{
+		render(){
+			return(
+				<div>
+					<User taskList={[]}/>
+				</div>
+			);
+		}
+	}
+
+	ReactDOM.render(<App/>, document.querySelector('#app'));		
+</script>
+
+</html>
