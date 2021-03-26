@@ -1,0 +1,57 @@
+.todo-app {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 520px;
+    min-height: 400px;
+    background: #1f2438;
+    text-align: center;
+    margin: 30px auto;
+    border-radius: 20px;
+    padding-bottom: 32px;
+}
+body {
+    background: linear-gradient(
+      #c0d1d6,
+      #d6ecf5
+    );
+  }
+h1 {
+    text-align: center;
+    background: #58d5fc;
+    margin: 10px;
+    padding: 7px;
+    border-radius: 10px;
+}
+h2,td {
+    margin: 32px 0;
+    color: #fff;
+    text-align:center;
+    /* font-size: 24px; */
+  }	
+button{
+    background-color: #58d5fc;
+    border-radius: 5px;
+    margin:5px
+}
+/* td{
+    padding:5px;
+    color: aliceblue;
+
+} */
+.redShow:hover{
+background-color: red;
+}
+.greenShow:hover{
+    background-color: green;
+}
+.transparent-style{
+
+    background-color: #ffffff;
+    opacity: .4;
+
+}
+
+/* [{"title":"My First Task"},{"title":"My First Task2"},{"title":"My First Task3"},{"title":"My First Task4"},{"title":"My First Task5"}] */
+
+    
