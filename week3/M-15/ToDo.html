@@ -1,0 +1,210 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<link rel="stylesheet" href="todo.css">
+		
+</head>
+<body>
+	<div id="app"></div>
+	<div id="recycle"></div>
+</body>
+
+<script type="text/babel">
+	class RecycleBin extends React.Component {
+		constructor(props){
+			super(props);
+			this.state = {cur_index:-1, prev_index:-1};
+			this.cached = [];			
+		}
+		
+		render() {
+			if(this.state.cur_index>=0 && this.state.cur_index!=this.state.prev_index){
+				this.cached.push(this.props.taskList);
+			}
+			
+			return (
+				<div className = 'todo-app'>
+					<h1>Total tasks (RecycleBin){this.cached.length}</h1>
+					<div align ="center">
+						<table>						
+							<tbody>
+							{
+							this.cached.map((taskList, index) => 
+								<tr key={index}>
+									<td>{taskList[index]}</td>
+									<td><button  onClick={()=> this.remove(taskList, index)}>Remove</button> &nbsp; &nbsp; <button  onClick={()=> this.restore(index)}>Restore</button></td>
+								</tr> 
+								)
+							}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			);
+		}
+		
+		
+		remove = (index) => {
+			this.cached.splice(index,1);
+		}
+		
+		restore = (index) => {	
+			this.cached.splice(index,1);
+			console.log("after splice : ");
+			console.log(this.cached);
+			this.setState({cur_index:-1});
+			//write your code to add stu to Student Component using props
+		}
+		
+		getSnapshotBeforeUpdate(prevProps, prevState) {
+			if(prevProps.index!=this.props.index){
+				this.setState({cur_index:this.props.index});
+			}
+			return null;
+		}
+		
+		componentDidUpdate(){
+			
+		}
+		
+		componentDidMount(){
+			this.setState({cur_index:this.props.index});
+		}
+	}
+
+	class User extends React.Component{
+		constructor(props){
+			super(props);
+			this.state = {taskList: [], input:"", index:-1};
+			this.cached = [];
+		}
+		
+		render(){ 
+			return(
+				<div className='todo-app'>
+					<h1>To-Do List</h1>
+					<div align ="center">
+					<input type='text' onChange={this.setInp} name='taskitem'  id="taskitem" value={this.state.input} placeholder='Add a Task' />
+					<button className='greenShow' onClick={this.addtoList}>+</button><button className='greenShow' onClick={this.update}>Update</button>
+					<div><h2>Tasks Left {this.state.taskList.length}</h2></div>
+					<table>
+						<tbody>
+
+						{
+							this.state.taskList.map((usr, i) => 
+							<tr key={i}>
+								
+								<td>{usr}</td>
+								<td><button className ="redShow" onClick={this.remove} value={i}>Delete</button></td>
+								<td><button className ="greenShow" onClick={()=> this.edit(i)} value={i}>Edit</button></td>
+							</tr>
+							)
+		
+						}
+						</tbody>						
+					</table>
+					</div>
+				</div>				
+			); 
+		}
+
+		setInp = (event) => {
+			console.log(event.target.value)
+			this.setState({input:event.target.value});
+		}
+
+		
+		addtoList = () =>{
+			const taskitem = this.state.input
+			console.log(taskitem);
+			if (taskitem === ""){
+				alert("plase Add a Task")
+			}
+			else
+			{
+			this.setState({taskList:[...this.state.taskList,taskitem]});
+			console.log(this.state.taskList);
+			this.setState({input:""});
+			}
+		}
+
+		remove = (e) => {
+			// alert(e.target.value)
+			const v = e.target.value
+			this.state.taskList.splice(v,1)
+			this.setState({taskList:[...this.state.taskList]});
+			// console.log(this.state.taskList);
+			ReactDOM.render(<RecycleBin index={v} taskList={this.state.taskList}/>, document.getElementById("recycle"));
+
+		}
+		 edit = (i) =>{
+			this.setState({input:this.state.taskList[i], index:i}); 
+		 }
+
+
+        update =()=>{
+                const i=this.state.index
+               // alert(this.state.list[r]);
+			   	const taskList = this.state.taskList
+				if(i>=0){
+					taskList[i] = this.state.input
+				}
+                this.setState({taskList: taskList});
+            	this.setState({input:"", index:-1});
+        }
+
+
+		// componentDidMount(){
+		// 	const taskList = localStorage.getItem("taskList");
+		// 	if(taskList!=null){
+		// 		this.setState({taskList:JSON.parse(taskList)});
+		// 	}
+			
+		// 	window.addEventListener("beforeunload", ()=>{
+		// 		localStorage.setItem("students",JSON.stringify(this.state.taskList));
+		// 	});
+		// }
+
+		getTaskList = () => {
+			fetch('https://raw.githubusercontent.com/Thumma-Bhavana/html/master/taskList.json') 
+			.then(resp => resp.json())
+			.then(data => {
+				console.log(data);
+				this.setState({taskList:data});
+			});
+		}
+		
+		componentDidMount(){
+			this.getTaskList();
+		}
+		
+		
+		componentWillUnmount(){
+		}
+	}
+
+	class App extends React.Component{
+		render(){
+			return(
+				<div>
+					<User/>
+				</div>
+			);
+		}
+	}
+
+	ReactDOM.render(<App/>, document.querySelector('#app'));
+	
+// 	// Set the date we're counting down to
+// var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
+
+// // Update the count down every 1 second
+// var x = setInterval(, 1000);
+
+
+</script>
+
+</html>
