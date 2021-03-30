@@ -27,15 +27,15 @@
 			
 			return (
 				<div className = 'todo-app'>
-					<h1>Total tasks (RecycleBin){this.cached.length}</h1>
+					<h1>Total tasks in RecycleBin{this.cached.length}</h1>
 					<div align ="center">
 						<table>						
 							<tbody>
 							{
 							this.cached.map((taskList, index) => 
 								<tr key={index}>
-									<td>{taskList[index]}</td>
-									<td><button  onClick={()=> this.remove(taskList, index)}>Remove</button> &nbsp; &nbsp; <button  onClick={()=> this.restore(index)}>Restore</button></td>
+									<td>{taskList}</td>
+									<td><button  onClick={()=> this.remove(index)}>Remove</button></td>
 								</tr> 
 								)
 							}
@@ -48,16 +48,17 @@
 		
 		
 		remove = (index) => {
-			this.cached.splice(index,1);
-		}
-		
-		restore = (index) => {	
+			// this.cached.splice(index,1);
 			this.cached.splice(index,1);
 			console.log("after splice : ");
 			console.log(this.cached);
 			this.setState({cur_index:-1});
 			//write your code to add stu to Student Component using props
 		}
+		
+		// restore = (index) => {	
+
+		// }
 		
 		getSnapshotBeforeUpdate(prevProps, prevState) {
 			if(prevProps.index!=this.props.index){
@@ -71,6 +72,7 @@
 		}
 		
 		componentDidMount(){
+			console.log("Mount", this.props.index)
 			this.setState({cur_index:this.props.index});
 		}
 	}
@@ -78,7 +80,7 @@
 	class User extends React.Component{
 		constructor(props){
 			super(props);
-			this.state = {taskList: [], input:"", index:-1};
+			this.state = {taskList: [], timeList: [], input:"", time:"", index:-1};
 			this.cached = [];
 		}
 		
@@ -88,6 +90,7 @@
 					<h1>To-Do List</h1>
 					<div align ="center">
 					<input type='text' onChange={this.setInp} name='taskitem'  id="taskitem" value={this.state.input} placeholder='Add a Task' />
+					<input type='text' onChange={this.setTime} name='tasktime'  id="tasktime" value={this.state.time} placeholder='End Time: HH:MM:SS' />
 					<button className='greenShow' onClick={this.addtoList}>+</button><button className='greenShow' onClick={this.update}>Update</button>
 					<div><h2>Tasks Left {this.state.taskList.length}</h2></div>
 					<table>
@@ -113,31 +116,42 @@
 
 		setInp = (event) => {
 			console.log(event.target.value)
-			this.setState({input:event.target.value});
+			this.setState({input: event.target.value});
+		}
+		setTime = (event) => {
+			console.log(event.target.value)
+			this.setState({time: event.target.value});
 		}
 
 		
 		addtoList = () =>{
 			const taskitem = this.state.input
-			console.log(taskitem);
-			if (taskitem === ""){
+			const timeitem = this.state.time
+			console.log(taskitem, timeitem);
+			if (taskitem === "" || timeitem === ""){
 				alert("plase Add a Task")
 			}
 			else
 			{
 			this.setState({taskList:[...this.state.taskList,taskitem]});
-			console.log(this.state.taskList);
-			this.setState({input:""});
+			this.setState({timeList:[...this.state.timeList,timeitem]});
+			console.log(this.state.taskList, this.state.timeList);
+			this.setState({input:"", time:""});
 			}
 		}
 
 		remove = (e) => {
 			// alert(e.target.value)
 			const v = e.target.value
-			this.state.taskList.splice(v,1)
-			this.setState({taskList:[...this.state.taskList]});
+			const task = this.state.taskList[v];			
+			const tasks = this.state.taskList; 
+			tasks.splice(v,1);
+			this.setState({taskList:tasks});
+
+			this.state.timeList.splice(v, 1);
+			this.setState({timeList:[...this.state.timeList]});
 			// console.log(this.state.taskList);
-			ReactDOM.render(<RecycleBin index={v} taskList={this.state.taskList}/>, document.getElementById("recycle"));
+			ReactDOM.render(<RecycleBin index={v} taskList={task}/>, document.getElementById("recycle"));
 
 		}
 		 edit = (i) =>{
@@ -177,12 +191,31 @@
 			});
 		}
 		
-		componentDidMount(){
-			this.getTaskList();
-		}
-		
-		
-		componentWillUnmount(){
+		componentDidMount() 
+		{
+			this.getTaskList() 
+			this.myvar = setInterval(() => {
+				let i = 0;
+				while ( i < this.state.taskList.length) {
+					var t = new Date()
+					var time = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
+					if (time > this.state.timeList[i] ){
+						alert("Task " +i + " will be deleted")
+						// this.remove()
+						const task = this.state.taskList.splice(i,1)
+						this.state.timeList.splice(i,1)
+						this.setState({taskList:[...this.state.taskList]})						
+						this.setState({timeList:[...this.state.timeList]})
+						ReactDOM.render(<RecycleBin index={i} taskList={task}/>, document.getElementById("recycle"));
+					}  
+					i++                     
+				}
+			}, 1000);
+
+    	}
+		componentWillUnmount() 
+		{
+			clearInterval(this.myvar);
 		}
 	}
 
@@ -198,11 +231,6 @@
 
 	ReactDOM.render(<App/>, document.querySelector('#app'));
 	
-// 	// Set the date we're counting down to
-// var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
-
-// // Update the count down every 1 second
-// var x = setInterval(, 1000);
 
 
 </script>
