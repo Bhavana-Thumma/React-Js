@@ -1,0 +1,17 @@
+table {
+  background-color: black;
+  padding: 10px;
+  width: 400px;
+  height: 400px;
+}
+td {
+  background-color:ghostwhite;
+  border: 1px solid black;
+  width: 5px;
+  height: 5px;
+  padding: 20px;
+  font-size: 30px;
+  margin: auto;  
+  border-radius: 7em;
+  text-align: center;
+}
