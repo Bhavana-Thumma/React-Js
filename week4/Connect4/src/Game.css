@@ -6,8 +6,7 @@ table {
   margin: 1% 37% auto auto;
   /* float: left; */
   border: black 1px solid;
-  border-radius: 25px;
-  
+  border-radius: 25px;  
 }
 td {
   background-color:ghostwhite;
@@ -15,6 +14,8 @@ td {
   font-size: 30px; 
   border-radius: 7em;
   text-align: center;
+  border-top-width: thick;
+
 }
 #clr {
   background-color:ghostwhite;

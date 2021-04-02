@@ -1,5 +1,6 @@
 import React from "react";
 import Game from './Game';
+import './Player.css';
 import {
     BrowserRouter as Router,
     Switch,
@@ -23,9 +24,10 @@ class Player extends React.Component {
             <input type='text' onChange={this.setPlayer2} id= 'player2' value={this.player2} placeholder='Enter Player2 Name'/>      
             <input type='text' onChange={this.setColor2} id= 'color2' value={this.color2} placeholder='Enter Player2 Color'/><br/>
             <Router>
-                <Link to="/Game"><button onClick={this.enter}><p>Start</p></button></Link>
+                <Link to="/Game"><button className='button' onClick={this.enter}><span>Start</span></button></Link>
                 {/* <h2>{this.state.result}</h2> */}
                 <h2 style={{color:'grey'}} id="result"></h2>
+                <h2 style={{color:'grey'}} id="but"></h2>
                 <Switch>
                 <Route path="/Game">
                     <Game player1={this.state.player1} player2={this.state.player2} color1={this.state.color1} color2={this.state.color2}/>

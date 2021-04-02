@@ -1,5 +1,6 @@
 import React from "react";
 import './Game.css';
+import './Player.css';
 class Game extends React.Component{
     constructor(props){
         super(props)
@@ -13,7 +14,9 @@ class Game extends React.Component{
                 [0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0]],
             winner: "",
-            color: this.props.color1
+            color: this.props.color1,
+            c1: 0,
+            c2: 0
             
         }
     }
@@ -41,18 +44,25 @@ class Game extends React.Component{
         );
     }
     
- 
+    // refresh = () => {
+    //   window.location.reload(false)
+    // }
     checkWinner = (b) =>{
        let w = (this.checkVertical(b) || this.checkDiagonalRight(b) || this.checkDiagonalLeft(b) || this.checkHorizontal(b))
         if(w === 1){
-            document.getElementById("result").innerHTML = "Congrats "+this.props.player1+ "!"
+            document.getElementById("result").innerHTML = "Congrats "+this.props.player1+ "!" +"\<br\> you took "+this.state.c1+" turns"
             document.getElementById("grid").style.display = "none"
             document.getElementById('refer').style.display = "none"
+            
+            // document.getElementById('but').innerHTML= "\<button "className=\'button\' onClick=\{this.refresh\}"\>\<span\>Start\</span\>\</button\>"
+            document.getElementById('but').innerHTML= `<button  onclick=${"location.reload()"}>Replay</button>`;
+
         }
         else if(w === 2){
-            document.getElementById("result").innerHTML = "Congrats "+this.props.player2+ "!"
+            document.getElementById("result").innerHTML =  "Congrats "+this.props.player2+ "!" +"\<br\> you took "+this.state.c2+" turns"
             document.getElementById("grid").style.display = "none"
             document.getElementById('refer').style.display = "none"
+            document.getElementById('but').innerHTML= `<button  onclick=${"location.reload()"}>Replay</button>`;
         }
       }
     checkVertical(board) {
@@ -119,6 +129,8 @@ class Game extends React.Component{
                         cells[i].style.backgroundColor=this.props.color1;
                         var b = this.state.board
                         b[row][col] = 1
+                        this.setState({c1: this.state.c1+1})
+                        console.log("c1", this.state.c1)
                         this.setState({board: b})
                         console.log(this.state.board, row, col)
                         this.checkWinner(b)
@@ -142,6 +154,8 @@ class Game extends React.Component{
                         }                       
                         b = this.state.board
                         b[row][col] = 2
+                        this.setState({c2: this.state.c2+1})
+                        console.log("c2",this.state.c2)
                         this.setState({board: b})
                         console.log(this.state.board, row, col)
                         this.checkWinner(b)
