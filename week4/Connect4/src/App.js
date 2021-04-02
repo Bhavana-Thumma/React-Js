@@ -1,5 +1,6 @@
 import React from "react";
 import Home from './Home';
+import './App.css';
 import Player from './Player';
 
 import {
@@ -23,7 +24,7 @@ export default function App() {
             </li>
           </ul>
         </nav>
-        <hr/>
+        {/* <hr/> */}
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

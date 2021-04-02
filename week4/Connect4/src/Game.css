@@ -1,17 +1,35 @@
 table {
-  background-color: black;
+  background-color: rgb(149, 153, 143);
+  width: 350px;
+  height: 300px;
   padding: 10px;
-  width: 400px;
-  height: 400px;
+  margin: 1% 37% auto auto;
+  /* float: left; */
+  border: black 1px solid;
+  border-radius: 25px;
+  
 }
 td {
   background-color:ghostwhite;
   border: 1px solid black;
-  width: 5px;
-  height: 5px;
-  padding: 20px;
-  font-size: 30px;
-  margin: auto;  
+  font-size: 30px; 
   border-radius: 7em;
   text-align: center;
+}
+#clr {
+  background-color:ghostwhite;
+  border: 1px solid black;
+  font-size: 30px; 
+  width: 20px;
+  height: 20px;
+  margin: auto auto auto auto;
+  border-radius: 7em;
+}
+#refer{
+  background-color:rgb(108, 108, 155);
+  width: 200px;
+  height: 170px;
+  margin: auto auto auto 20%;
+  float: left;
+  border-radius: 2em;
 }
